@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wkkgz Vergelijker 2026 — Vind het beste & goedkoopste Wkkgz-abonnement</title>
+    <meta name="description" content="Vergelijk alle Wkkgz-abonnementen voor zorgverleners. Onafhankelijk overzicht van prijzen, voorwaarden, eigen risico & verborgen kosten. Vind het beste abonnement voor jouw situatie.">
+    <meta name="keywords" content="Wkkgz, wkkgz abonnement, wkkgz vergelijken, klachtenregeling zorg, zzp zorg, geschilleninstantie">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Wkkgz Vergelijker 2026 — Vind het beste Wkkgz-abonnement">
+    <meta property="og:description" content="Vergelijk alle Wkkgz-abonnementen voor zorgverleners. Onafhankelijk overzicht.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wkkgzvergelijker.nl">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Wkkgz Vergelijker",
+        "description": "Onafhankelijke vergelijkingssite voor Wkkgz-abonnementen",
+        "url": "https://wkkgzvergelijker.nl"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Wat is een Wkkgz-abonnement?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Een Wkkgz-abonnement regelt je verplichte klachtenregeling, onafhankelijke klachtenfunctionaris en aansluiting bij een VWS-erkende geschilleninstantie. Dit is wettelijk verplicht voor alle zorgaanbieders in Nederland."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Wat kost een Wkkgz-abonnement?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "De prijzen variëren van €48,40 per jaar (ZorgDoenWijSamen) tot €208,80 per jaar (ZorgVoorZZP Compleet). De meeste ZZP'ers betalen tussen de €50 en €115 per jaar."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is een Wkkgz-abonnement verplicht voor ZZP'ers?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja, als je als ZZP'er zorg verleent ben je wettelijk verplicht om een klachtenregeling te hebben, een onafhankelijke klachtenfunctionaris en aangesloten te zijn bij een VWS-erkende geschilleninstantie."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav__inner">
+            <a href="/" class="nav__logo">
+                <span class="nav__logo-icon">⚖️</span>
+                <span class="nav__logo-text">Wkkgz<span class="nav__logo-highlight">Vergelijker</span></span>
+            </a>
+            <div class="nav__links">
+                <a href="#vergelijken" class="nav__link">Vergelijken</a>
+                <a href="#uitleg" class="nav__link">Uitleg</a>
+                <a href="#blog" class="nav__link">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <span class="hero__badge">2026 · Onafhankelijk</span>
+                <h1 class="hero__title">
+                    Het beste Wkkgz-abonnement<br>
+                    <span class="hero__highlight">vind je hier</span>
+                </h1>
+                <p class="hero__subtitle">
+                    Vergelijk alle erkende aanbieders op prijs, voorwaarden en verborgen kosten. 
+                    Geen poespas. Gewoon de feiten.
+                </p>
+                <a href="#vergelijken" class="btn btn--primary">Direct vergelijken ↓</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Update banner -->
+    <section class="update-banner">
+        <div class="container">
+            <p class="update-banner__text">
+                📅 Laatste update: <strong>8 juli 2026</strong> · 
+                Prijzen gecontroleerd via officiële websites · 
+                <a href="#update-log" class="update-banner__link">Wijzigingen bekijken</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Comparison Table Section -->
+    <section class="comparison" id="vergelijken">
+        <div class="container">
+            <h2 class="section__title">Vergelijk alle Wkkgz-abonnementen</h2>
+            <p class="section__subtitle">Onafhankelijk overzicht van alle aanbieders, prijzen en verborgen kosten.</p>
+            
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filters__group">
+                    <label class="filters__label">Filter op:</label>
+                    <div class="filters__buttons" id="filterButtons">
+                        <button class="filter-btn filter-btn--active" data-filter="all">Alle</button>
+                        <button class="filter-btn" data-filter="budget">Budget (< €60)</button>
+                        <button class="filter-btn" data-filter="mid">Midden (€60-€120)</button>
+                        <button class="filter-btn" data-filter="premium">Premium (> €120)</button>
+                        <button class="filter-btn" data-filter="no-deductible">Zonder eigen risico</button>
+                        <button class="filter-btn" data-filter="big">BIG-geregistreerd</button>
+                    </div>
+                </div>
+                <div class="filters__sort">
+                    <label class="filters__label">Sorteer:</label>
+                    <select id="sortSelect" class="filters__select">
+                        <option value="price-asc">Prijs (laag → hoog)</option>
+                        <option value="price-desc">Prijs (hoog → laag)</option>
+                        <option value="rating">Beoordeling</option>
+                        <option value="name">Naam (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Quick Keuzehulp -->
+            <div class="keuzehulp">
+                <h3 class="keuzehulp__title">🔍 Keuzehulp — Wat past bij jou?</h3>
+                <div class="keuzehulp__options" id="keuzehulp">
+                    <button class="keuzehulp__btn" data-need="minimaal">
+                        <span class="keuzehulp__icon">💰</span>
+                        <span>Ik wil het goedkoopst</span>
+                    </button>
+                    <button class="keuzehulp__btn" data-need="zekerheid">
+                        <span class="keuzehulp__icon">🛡️</span>
+                        <span>Ik wil geen extra kosten bij klacht</span>
+                    </button>
+                    <button class="keuzehulp__btn" data-need="big">
+                        <span class="keuzehulp__icon">👨‍⚕️</span>
+                        <span>Ik ben BIG-geregistreerd</span>
+                    </button>
+                    <button class="keuzehulp__btn" data-need="all-in">
+                        <span class="keuzehulp__icon">📦</span>
+                        <span>Ik wil alles-in-1</span>
+                    </button>
+                </div>
+                <div id="keuzehulpResult" class="keuzehulp__result"></div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-wrapper">
+                <table class="comparison-table" id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th class="col-provider">Aanbieder</th>
+                            <th class="col-price">Prijs/jaar <span class="th-note">incl. BTW</span></th>
+                            <th class="col-firstyear">1e jaar totaal</th>
+                            <th class="col-signup">Inschrijf<br>kosten</th>
+                            <th class="col-deductible">Eigen risico<br><span class="th-note">per klacht</span></th>
+                            <th class="col-zitting">Kosten zitting</th>
+                            <th class="col-instantie">Geschilleninstantie</th>
+                            <th class="col-rating"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="table__disclaimer">
+                * Prijzen zijn exclusief eventuele eigen risico's of bijkomende kosten. 
+                Laatste controle: 8 juli 2026. Zie de algemene voorwaarden van elke aanbieder voor de volledige details.
+            </p>
+        </div>
+    </section>
+
+    <!-- Uitleg Section -->
+    <section class="uitleg" id="uitleg">
+        <div class="container">
+            <h2 class="section__title">Wat is de Wkkgz en wat moet je regelen?</h2>
+            
+            <div class="uitleg__grid">
+                <div class="uitleg__card">
+                    <div class="uitleg__card-icon">📋</div>
+                    <h3>1. Kwaliteitssysteem</h3>
+                    <p>Je moet structureel aantonen dat je goede zorg levert. Denk aan protocollen, dossiervoering en reflectie.</p>
+                </div>
+                <div class="uitleg__card">
+                    <div class="uitleg__card-icon">⚠️</div>
+                    <h3>2. Incidenten registreren</h3>
+                    <p>Een intern systeem voor het melden, onderzoeken en verbeteren van incidenten (VIM).</p>
+                </div>
+                <div class="uitleg__card">
+                    <div class="uitleg__card-icon">🤝</div>
+                    <h3>3. Klachtenregeling</h3>
+                    <p>Een schriftelijke regeling + onafhankelijke klachtenfunctionaris + aansluiting bij erkende geschilleninstantie.</p>
+                </div>
+                <div class="uitleg__card">
+                    <div class="uitleg__card-icon">📝</div>
+                    <h3>4. Schriftelijke overeenkomsten</h3>
+                    <p>Leg vast dat ook samenwerkende zorgverleners aan de Wkkgz voldoen.</p>
+                </div>
+                <div class="uitleg__card">
+                    <div class="uitleg__card-icon">🏛️</div>
+                    <h3>5. Wtza-melding (2022)</h3>
+                    <p>Meld je bij het Landelijk Register Zorgaanbieders (LRZa) vóór je start als ZZP'er. Dit is <strong>gratis</strong>.</p>
+                </div>
+                <div class="uitleg__card">
+                    <div class="uitleg__card-icon">📢</div>
+                    <h3>6. Communicatie</h3>
+                    <p>Je moet cliënten informeren over de klachtenregeling. Doe dit bij intake, op je website of in de praktijk.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Officiële Erkende Instanties Section -->
+    <section class="instanties" id="instanties">
+        <div class="container">
+            <h2 class="section__title">VWS-erkende geschilleninstanties</h2>
+            <p class="section__subtitle">
+                Deze instanties zijn door de minister van VWS erkend. 
+                Alleen aansluiting bij een van deze instanties is rechtsgeldig.
+                <br><a href="https://www.geschilleninstantieszorg.nl/erkende-instanties" target="_blank" rel="noopener">→ Officiële lijst Rijksoverheid</a>
+            </p>
+            
+            <div class="instanties__list" id="instantiesList">
+                <!-- populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Teaser -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <h2 class="section__title">Meer weten over de Wkkgz?</h2>
+            <div class="blog__grid">
+                <a href="/blog/wkkgz-verplichtingen" class="blog__card">
+                    <div class="blog__card-content">
+                        <span class="blog__tag">Uitleg</span>
+                        <h3>Wkkgz-verplichtingen voor ZZP'ers — compleet overzicht</h3>
+                        <p>Alles wat je moet regelen om compliant te zijn in 2026.</p>
+                        <span class="blog__readmore">Lees verder →</span>
+                    </div>
+                </a>
+                <a href="/blog/verborgen-kosten" class="blog__card">
+                    <div class="blog__card-content">
+                        <span class="blog__tag">Analyse</span>
+                        <h3>Verborgen kosten Wkkgz-abonnementen — de kleine lettertjes</h3>
+                        <p>Welke aanbieders hebben eigen risico, depotplicht of zittingskosten?</p>
+                        <span class="blog__readmore">Lees verder →</span>
+                    </div>
+                </a>
+                <a href="/blog/wkkgz-vs-wzd-wmo" class="blog__card">
+                    <div class="blog__card-content">
+                        <span class="blog__tag">Vergelijking</span>
+                        <h3>Wkkgz vs Wzd vs Wmo — wat heb jij nodig?</h3>
+                        <p>De verschillen tussen de drie wettelijke kaders uitgelegd.</p>
+                        <span class="blog__readmore">Lees verder →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Update Log -->
+    <section class="update-log" id="update-log">
+        <div class="container">
+            <h3 class="update-log__title">📋 Wijzigingslog</h3>
+            <div class="update-log__entries">
+                <div class="update-log__entry">
+                    <span class="update-log__date">2026-07-08</span>
+                    <span class="update-log__change">Eerste versie gelanceerd. 10 aanbieders vergeleken op prijs, voorwaarden en verborgen kosten. Prijzen gecontroleerd via officiële websites en het reglement van elke geschillencommissie.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__col">
+                <h4 class="footer__title">WkkgzVergelijker.nl</h4>
+                <p class="footer__text">Onafhankelijke vergelijkingssite voor Wkkgz-abonnementen. Wij zijn geen aanbieder, wij helpen je de beste keuze te maken.</p>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__title">Links</h4>
+                <ul class="footer__links">
+                    <li><a href="https://www.geschilleninstantieszorg.nl/erkende-instanties" target="_blank" rel="noopener">Erkende instanties (Rijksoverheid)</a></li>
+                    <li><a href="https://www.rijksoverheid.nl/onderwerpen/kwaliteit-van-de-zorg/wet-kwaliteit-klachten-en-geschillen-zorg" target="_blank" rel="noopener">Wkkgz wet- en regelgeving</a></li>
+                    <li><a href="https://www.lrza.nl" target="_blank" rel="noopener">Landelijk Register Zorgaanbieders</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4 class="footer__title">Over deze site</h4>
+                <p class="footer__text">Deze site wordt maandelijks bijgewerkt. Prijzen kunnen wijzigen. Controleer altijd de officiële website van de aanbieder voor de actuele tarieven.</p>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="container">
+                <p>© 2026 WkkgzVergelijker.nl · Independer? Nog niet. Maar we komen eraan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

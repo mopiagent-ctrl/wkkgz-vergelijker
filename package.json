@@ -1,0 +1,11 @@
+{
+    "name": "wkkgz-vergelijker",
+    "version": "1.0.0",
+    "description": "Onafhankelijke vergelijkingssite voor Wkkgz-abonnementen",
+    "scripts": {
+        "update": "node update-data.js",
+        "start": "npx serve ."
+    },
+    "keywords": ["wkkgz", "vergelijken", "zorg", "zzp"],
+    "license": "MIT"
+}

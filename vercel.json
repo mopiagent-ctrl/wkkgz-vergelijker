@@ -1,0 +1,20 @@
+{
+    "redirects": [
+        {
+            "source": "/blog/wkkgz-verplichtingen",
+            "destination": "/blog/wkkgz-verplichtingen.html",
+            "permanent": true
+        },
+        {
+            "source": "/blog/verborgen-kosten",
+            "destination": "/blog/verborgen-kosten.html",
+            "permanent": true
+        },
+        {
+            "source": "/blog/wkkgz-vs-wzd-wmo",
+            "destination": "/blog/wkkgz-vs-wzd-wmo.html",
+            "permanent": true
+        }
+    ],
+    "cleanUrls": true
+}
