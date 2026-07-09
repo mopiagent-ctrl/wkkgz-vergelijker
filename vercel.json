@@ -11,6 +11,11 @@
             "permanent": true
         },
         {
+            "source": "/blog/wkkgz-voor-big",
+            "destination": "/blog/wkkgz-voor-big.html",
+            "permanent": true
+        },
+        {
             "source": "/blog/wkkgz-vs-wzd-wmo",
             "destination": "/blog/wkkgz-vs-wzd-wmo.html",
             "permanent": true

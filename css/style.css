@@ -577,6 +577,69 @@ section { padding: 60px 0; }
     color: var(--primary);
 }
 
+/* Email Capture */
+.email-capture {
+    padding: 40px 0 20px;
+}
+
+.email-capture__card {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    text-align: center;
+    color: #fff;
+}
+
+.email-capture__title {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.email-capture__text {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 24px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.email-capture__form {
+    display: flex;
+    gap: 10px;
+    max-width: 450px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.email-capture__input {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    font-family: inherit;
+    min-width: 200px;
+}
+
+.email-capture__btn {
+    background: #fff;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+.email-capture__btn:hover {
+    background: var(--gray-100);
+    transform: translateY(-1px);
+}
+
+.email-capture__disclaimer {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-top: 12px;
+}
+
 /* Update Log */
 .update-log { padding: 30px 0 50px; }
 

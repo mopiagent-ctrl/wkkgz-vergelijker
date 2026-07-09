@@ -12,6 +12,19 @@
     <meta property="og:description" content="Vergelijk alle Wkkgz-abonnementen voor zorgverleners. Onafhankelijk overzicht.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wkkgzvergelijker.nl">
+    <meta property="og:image" content="https://wkkgzvergelijker.nl/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wkkgz Vergelijker 2026 — Vind het beste Wkkgz-abonnement">
+    <meta name="twitter:description" content="Vergelijk alle Wkkgz-abonnementen voor zorgverleners. Onafhankelijk overzicht van prijzen, voorwaarden en verborgen kosten.">
+    
+    <!-- Google Analytics (GA4) — Vervang G-XXXXXXXXXX met je eigen Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -249,7 +262,7 @@
         <div class="container">
             <h2 class="section__title">Meer weten over de Wkkgz?</h2>
             <div class="blog__grid">
-                <a href="/blog/wkkgz-verplichtingen" class="blog__card">
+                <a href="blog/wkkgz-verplichtingen.html" class="blog__card">
                     <div class="blog__card-content">
                         <span class="blog__tag">Uitleg</span>
                         <h3>Wkkgz-verplichtingen voor ZZP'ers — compleet overzicht</h3>
@@ -257,7 +270,7 @@
                         <span class="blog__readmore">Lees verder →</span>
                     </div>
                 </a>
-                <a href="/blog/verborgen-kosten" class="blog__card">
+                <a href="blog/verborgen-kosten.html" class="blog__card">
                     <div class="blog__card-content">
                         <span class="blog__tag">Analyse</span>
                         <h3>Verborgen kosten Wkkgz-abonnementen — de kleine lettertjes</h3>
@@ -265,7 +278,15 @@
                         <span class="blog__readmore">Lees verder →</span>
                     </div>
                 </a>
-                <a href="/blog/wkkgz-vs-wzd-wmo" class="blog__card">
+                <a href="blog/wkkgz-voor-big.html" class="blog__card">
+                    <div class="blog__card-content">
+                        <span class="blog__tag">BIG</span>
+                        <h3>Wkkgz voor BIG-geregistreerden — wat moet je regelen?</h3>
+                        <p>Speciaal voor artsen, tandartsen, fysio's en verpleegkundigen.</p>
+                        <span class="blog__readmore">Lees verder →</span>
+                    </div>
+                </a>
+                <a href="blog/wkkgz-vs-wzd-wmo.html" class="blog__card">
                     <div class="blog__card-content">
                         <span class="blog__tag">Vergelijking</span>
                         <h3>Wkkgz vs Wzd vs Wmo — wat heb jij nodig?</h3>
@@ -273,6 +294,26 @@
                         <span class="blog__readmore">Lees verder →</span>
                     </div>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Capture Section -->
+    <section class="email-capture">
+        <div class="container">
+            <div class="email-capture__card">
+                <div class="email-capture__content">
+                    <h2 class="email-capture__title">📬 Blijf op de hoogte</h2>
+                    <p class="email-capture__text">
+                        Prijzen wijzigen, nieuwe aanbieders komen bij. Ontvang maandelijks een update 
+                        over de beste Wkkgz-deals — geen spam, alleen feiten.
+                    </p>
+                    <form class="email-capture__form" action="mailto:redacted@example.com" method="post" enctype="text/plain" id="emailForm">
+                        <input type="email" name="email" placeholder="jouw@email.nl" required class="email-capture__input" id="emailInput">
+                        <button type="submit" class="btn btn--primary email-capture__btn">Aanmelden →</button>
+                    </form>
+                    <p class="email-capture__disclaimer">Geen spam. Max 1x per maand. Afmelden kan altijd.</p>
+                </div>
             </div>
         </div>
     </section>
