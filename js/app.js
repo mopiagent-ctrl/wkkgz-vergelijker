@@ -95,39 +95,51 @@ function renderTable(data) {
         else if (p.price_per_year < 120) tags.push('<span class="provider-tag tag--mid">Midden</span>');
         else tags.push('<span class="provider-tag tag--premium">Premium</span>');
         
-        if (p.eigen_risico_per_klacht === '€0 (geen eigen risico)') 
+        if (p.eigen_risico_per_klacht === '€0 (geen eigen risico)' || p.eigen_risico_per_klacht === '€0 — geen eigen risico' || p.eigen_risico_per_klacht === '€0 (geen)')
             tags.push('<span class="provider-tag tag--no-deductible">Geen eigen risico</span>');
         
-        if (p.depot_verplichting) 
-            tags.push('<span class="provider-tag tag--warning">⚠️ Depot</span>');
+        if (p.depot_verplichting || (p.kosten_per_zitting && p.kosten_per_zitting.includes('€2.500')))
+            tags.push('<span class="provider-tag tag--warning">⚠️ Verborgen kosten</span>');
         
-        const riskClass = p.eigen_risico_per_klacht === '€0 (geen eigen risico)' ? 'risk-green' : 
-                         (p.eigen_risico_per_klacht === '€150+ per klacht' || p.depot_verplichting ? 'risk-red' : 'risk-gray');
+        if (p.kosten_per_zitting && p.kosten_per_zitting.includes('€0'))
+            tags.push('<span class="provider-tag tag--no-deductible">Alles gedekt</span>');
         
-        const zittingClass = p.kosten_per_zitting === '€0 (alles gedekt in abonnement)' ? 'risk-green' :
-                           (p.depot_verplichting ? 'risk-red' : 'risk-gray');
+        if (p.verplichte_bav)
+            tags.push('<span class="provider-tag tag--warning">BAV verplicht</span>');
+        
+        // Check if Wzd is covered
+        const dekkingIcons = [];
+        if (p.dekking_wzd) dekkingIcons.push('Wzd');
+        if (p.dekking_wmo) dekkingIcons.push('Wmo');
+        if (p.dekking_jeugdwet) dekkingIcons.push('Jeugd');
+        const dekkingStr = dekkingIcons.length ? dekkingIcons.join('+') : 'Alleen Wkkgz';
+        
+        const riskClass = (!p.eigen_risico_per_klacht || p.eigen_risico_per_klacht === '€0 (geen eigen risico)' || p.eigen_risico_per_klacht === '€0 — geen eigen risico') && 
+                         (!p.kosten_per_zitting || p.kosten_per_zitting.includes('€0')) ? 'risk-green' : 
+                         (p.kosten_per_zitting && (p.kosten_per_zitting.includes('€2.500') || p.kosten_per_zitting.includes('€295') || p.kosten_per_zitting.includes('€4.000'))) ? 'risk-red' : 'risk-gray';
         
         return `
             <tr>
                 <td>
                     <a href="${p.url}" target="_blank" rel="noopener" class="provider-name">${p.name}</a>
                     <div class="provider-tags">${tags.join('')}</div>
+                    <div style="margin-top:4px;font-size:0.7rem;color:var(--gray-400)">Dekking: ${dekkingStr}</div>
                 </td>
                 <td>
                     <span class="price-primary">€${p.price_per_year.toFixed(2).replace('.', ',')}</span>
-                    <span class="price-note">${p.price_note}</span>
+                    <span class="price-note">${p.price_note ? p.price_note.substring(0,60) + '...' : ''}</span>
                 </td>
                 <td>
                     <span class="price-primary">€${p.first_year_total.toFixed(2).replace('.', ',')}</span>
                     <span class="price-note">daarna €${p.renewal_total.toFixed(2).replace('.', ',')}/jr</span>
                 </td>
-                <td>${p.inschrijfkosten}</td>
-                <td class="${riskClass}">${p.eigen_risico_per_klacht}</td>
-                <td class="${zittingClass}">${p.kosten_per_zitting}${p.depot_bedrag ? '<br><span class="price-note">' + p.depot_bedrag + '</span>' : ''}</td>
-                <td><span style="font-size:0.8rem">${p.geschilleninstantie}</span></td>
+                <td>${p.inschrijfkosten || 'Geen'}</td>
+                <td class="${p.eigen_risico_per_klacht && (p.eigen_risico_per_klacht.includes('€0') || p.eigen_risico_per_klacht.includes('Geen')) ? 'risk-green' : 'risk-red'}">${p.eigen_risico_per_klacht || 'Onbekend'}</td>
+                <td class="${riskClass}">${p.kosten_per_zitting || 'Onbekend'}</td>
+                <td><span style="font-size:0.8rem">${p.geschilleninstantie.substring(0,50)}...</span></td>
                 <td>
                     <div class="rating-dots">${ratingDots}</div>
-                    <a href="${p.url}" target="_blank" rel="noopener" class="price-cta">→ Website</a>
+                    <a href="${p.url}" target="_blank" rel="noopener" class="price-cta">→ Site</a>
                 </td>
             </tr>
         `;
@@ -148,7 +160,6 @@ function renderInstanties() {
 function filterProviders(filter) {
     activeFilter = filter;
     
-    // Update active button
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('filter-btn--active', btn.dataset.filter === filter);
     });
@@ -157,7 +168,7 @@ function filterProviders(filter) {
     
     switch(filter) {
         case 'budget':
-            filtered = filtered.filter(p => p.price_per_year <= 60);
+            filtered = filtered.filter(p => p.price_per_year >= 0 && p.price_per_year <= 60);
             break;
         case 'mid':
             filtered = filtered.filter(p => p.price_per_year > 60 && p.price_per_year <= 120);
@@ -166,10 +177,10 @@ function filterProviders(filter) {
             filtered = filtered.filter(p => p.price_per_year > 120);
             break;
         case 'no-deductible':
-            filtered = filtered.filter(p => p.eigen_risico_per_klacht === '€0 (geen eigen risico)');
+            filtered = filtered.filter(p => p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('geen') || p.kosten_per_zitting.includes('Alles')));
             break;
-        case 'big':
-            filtered = filtered.filter(p => p.categorieen.includes('big'));
+        case 'breedste-dekking':
+            filtered = filtered.filter(p => p.dekking_wzd === true && p.kosten_per_zitting && p.kosten_per_zitting.includes('€0'));
             break;
         default:
             break;
@@ -210,21 +221,21 @@ function handleKeuzehulp(need) {
         case 'minimaal':
             filtered = providers.sort((a, b) => a.price_per_year - b.price_per_year).slice(0, 3);
             result = `💰 <strong>Goedkoopste opties:</strong> ${filtered.map(p => p.name + ' (€' + p.price_per_year.toFixed(2).replace('.', ',') + '/jr)').join(', ')}.<br>
-                      <strong>Winnaar:</strong> ZorgDoenWijSamen voor €48,40/jaar — de absolute basis, geen franje.`;
+                      <strong>Let op:</strong> ZorgDoenWijSamen is het goedkoopst, maar rekent €2.500+ per geschil. Kies bewust.`;
             break;
         case 'zekerheid':
-            filtered = providers.filter(p => p.eigen_risico_per_klacht === '€0 (geen eigen risico)');
-            result = `🛡️ <strong>Zonder eigen risico:</strong> ${filtered.map(p => p.name).join(' en ')} hebben geen eigen risico per klacht.<br>
-                      <strong>Winnaar:</strong> SoloPartners SoloPlus (€90,75/jr) — de goedkoopste met 100% kosten dekking bij geschillen.`;
+            filtered = providers.filter(p => p.kosten_per_zitting && p.kosten_per_zitting.includes('€0'));
+            result = `🛡️ <strong>Zonder verborgen kosten:</strong> ${filtered.map(p => p.name).join(', ')} hebben geen extra kosten bij een geschil.<br>
+                      <strong>Aanrader:</strong> SoloPartners SoloPlus (€90,75/jr) — alles gedekt, geen eigen risico, ook Wzd+Wmo inbegrepen.`;
             break;
-        case 'big':
-            filtered = providers.filter(p => p.categorieen.includes('big'));
-            result = `👨‍⚕️ <strong>BIG-geregistreerd:</strong> NIBIG is specifiek voor BIG'ers. Maar elk generiek abonnement werkt ook voor jou.<br>
-                      <strong>Advies:</strong> ZorgDoenWijSamen (€48,40) voor de prijs, SoloPartners (€90,75) voor zekerheid.`;
+        case 'breedst':
+            filtered = providers.filter(p => p.dekking_wzd === true && p.kosten_per_zitting && p.kosten_per_zitting.includes('€0'));
+            result = `🏥 <strong>Breedste dekking (incl. Wzd):</strong> ${filtered.map(p => p.name).join(', ')}.<br>
+                      <strong>Aanrader:</strong> SoloPartners SoloPlus — dekt Wkkgz+Wzd+Wmo+Jeugdwet, geen verborgen kosten.`;
             break;
         case 'all-in':
-            result = `📦 <strong>Alles-in-1:</strong> SoloPartners SoloCompleet (€160/jr, incl. VOG+protocollen) of ZorgVoorZZP (€208,80/jr, incl. Wtza+community).<br>
-                      <strong>Advies:</strong> SoloCompleet is voordeliger. Alleen ZorgVoorZZP als je de community-functies echt gaat gebruiken.`;
+            result = `📦 <strong>Alles-in-1:</strong> SoloPartners SoloCompleet (€160/jr, incl. VOG+protocollen).<br>
+                      <strong>Advies:</strong> Alleen doen als je VOG en protocollen nog nodig hebt. Anders is SoloPlus voordeliger.`;
             break;
     }
     
