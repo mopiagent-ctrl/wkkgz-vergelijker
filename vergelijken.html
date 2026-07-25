@@ -184,6 +184,17 @@
             if (p.dekking_jeugdwet) dekking.push('Jeugdwet');
             const dekkingStr = dekking.length ? dekking.join(' + ') : 'Alleen Wkkgz';
 
+            // Competition badges
+            if (p.rating_value >= 9 && (p.kosten_per_zitting || '').includes('€0')) {
+                tags.push('<span class="provider-tag tag--best\">Beste keuze</span>');
+            }
+            if (p.price_per_year <= 70 && (p.kosten_per_zitting || '').includes('€0')) {
+                tags.push('<span class="provider-tag tag--best-value\">Beste prijs-kwaliteit</span>');
+            }
+            if (p.price_per_year === Math.min(...providers.filter(x => data.includes(x)).map(x => x.price_per_year))) {
+                tags.push('<span class="provider-tag tag--cheapest\">Laagste prijs</span>');
+            }
+
             return `<tr>
                 <td>
                     <a href="${p.url}" target="_blank" rel="noopener" class="provider-name">${p.name}</a>

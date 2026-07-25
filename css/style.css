@@ -561,6 +561,10 @@ section { padding: 60px 0; }
 .tag--no-deductible { background: #e0f2fe; color: #075985; }
 .tag--warning { background: var(--danger-light); color: var(--danger); }
 
+.tag--best { background: #fef3c7; color: #92400e; font-weight: 700; }
+.tag--best-value { background: var(--accent-light); color: #065f46; font-weight: 700; }
+.tag--cheapest { background: #e0f2fe; color: #075985; }
+
 /* Price cell */
 .price-primary {
     font-weight: 700;
