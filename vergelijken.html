@@ -47,6 +47,11 @@
                 </div>
             </div>
 
+            <div class="top-picks" id="topPicks">
+                <h3 class="top-picks__title">Onze aanbevelingen</h3>
+                <div class="top-picks__grid" id="topPicksGrid"><p>Laden...</p></div>
+            </div>
+
             <div class="keuzehulp">
                 <h3 class="keuzehulp__title">Snel vinden wat bij u past</h3>
                 <div class="keuzehulp__options" id="keuzehulp">
@@ -97,11 +102,50 @@
         try {
             const res = await fetch('data/providers.json');
             providers = await res.json();
+            renderTopPicks();
             sortAndRender('price-asc');
         } catch(err) {
             document.getElementById('tableBody').innerHTML = 
                 '<tr><td colspan="6" style="text-align:center;padding:40px;color:#999">Data kon niet worden geladen.</td></tr>';
         }
+    }
+
+    function renderTopPicks() {
+        // Best all-round: no hidden costs, broad coverage, good rating
+        const safe = providers.filter(p => 
+            p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
+        ).sort((a,b) => a.price_per_year - b.price_per_year);
+        
+        // Best budget without hidden risks
+        const budgetSafe = safe[0];
+        
+        // Best coverage
+        const broadest = providers.filter(p => 
+            p.dekking_wzd && p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
+        ).sort((a,b) => a.price_per_year - b.price_per_year)[0];
+        
+        // Cheapest overall (even if risky)
+        const cheapest = [...providers].sort((a,b) => a.price_per_year - b.price_per_year)[0];
+
+        const picks = [
+            { label: 'Beste prijs-kwaliteit', p: budgetSafe, desc: 'Geen verborgen kosten, beste dekking voor uw geld' },
+            { label: 'Breedste dekking', p: broadest, desc: 'Wkkgz + Wzd + Wmo, zonder eigen risico' },
+            { label: 'Laagste prijs', p: cheapest, desc: 'Minimale jaarlijkse kosten — let op voorwaarden' }
+        ];
+
+        document.getElementById('topPicksGrid').innerHTML = picks.map(pick => {
+            if (!pick.p) return '';
+            const hasRisk = pick.p.kosten_per_zitting && 
+                (pick.p.kosten_per_zitting.includes('€2.500') || pick.p.kosten_per_zitting.includes('€1.815') || pick.p.kosten_per_zitting.includes('€1.500'));
+            return `<div class="top-pick-card ${hasRisk ? 'top-pick-card--warning' : ''}">
+                <span class="top-pick-badge">${pick.label}</span>
+                <strong>${pick.p.name.split(' —')[0].split(' (')[0]}</strong>
+                <span class="top-pick-price">€${pick.p.price_per_year.toFixed(2).replace('.',',')}/jr</span>
+                <span class="top-pick-desc">${pick.desc}</span>
+                ${hasRisk ? '<span class="top-pick-warning">Let op: hoge geschilkosten mogelijk</span>' : ''}
+                <a href="${pick.p.url}" target="_blank" rel="noopener" class="top-pick-link">Bekijk aanbieder</a>
+            </div>`;
+        }).join('');
     }
 
     function renderTable(data) {
