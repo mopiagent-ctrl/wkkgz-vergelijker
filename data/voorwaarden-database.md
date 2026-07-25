@@ -51,3 +51,23 @@ Verplichte BAV €25.000. Depot kan worden verlangd.
 ### NIP — ALLEEN PSYCHOLOGEN, HOGE GESCHILKOSTEN
 Beide pakketten: geschillencommissie ~€2.500 per geschil voor eigen rekening.
 Alleen voor NIP-leden. Alleen Wkkgz.
+
+## Opzegtermijnen
+
+| Aanbieder | Opzegtermijn |
+|-----------|-------------|
+| ZZP'er in de zorg | **Maandelijks** (uniek) |
+| Zorg voor ZZP | 1 maand per e-mail |
+| Erisietsmisgegaan | 1 maand voor verlenging |
+| SoloPartners | Jaarlijks |
+| ZorgDoenWijSamen | **3 maanden**, einde kalenderjaar |
+
+## Nieuwe Affiliate Programma's
+
+| Programma | Netwerk | Commissie | Beste voor |
+|-----------|---------|-----------|-----------|
+| **TAF** | Daisycon #20722 | €175 CPA | AOV, "Beste AOV 2024" |
+| **Centraal Beheer** | Awin #8357 | % van premie | Complete ZZP suite |
+| **Pricewise** | Daisycon #18644 | €30 CPA | Lead-gen auto |
+| **a.s.r.** | Daisycon #19788 | Variabel | AOV, pensioen |
+| **OHRA** | Daisycon #317 | Variabel | TOP programma |
