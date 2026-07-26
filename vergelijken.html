@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vergelijk Wkkgz-aanbieders — Wkkgz Vergelijker</title>
+    <title>Vergelijk Wkkgz-aanbieders  –  Wkkgz Vergelijker</title>
     <meta name="description" content="Vergelijk onafhankelijk alle aanbieders die u helpen aan de Wkkgz te voldoen. Filter op prijs, dekking en verborgen kosten.">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
     <section class="comparison" style="padding-top:40px">
         <div class="container">
             <h2 class="section__title">Vergelijk alle Wkkgz-aanbieders</h2>
-            <p class="section__subtitle">Laatste controle: juli 2026. Alle aanbieders die u helpen voldoen aan de Wkkgz-verplichtingen — objectief vergeleken op prijs, dekking en voorwaarden.</p>
+            <p class="section__subtitle">Laatste controle: juli 2026. Alle aanbieders die u helpen voldoen aan de Wkkgz-verplichtingen  –  objectief vergeleken op prijs, dekking en voorwaarden.</p>
 
             <div class="filters">
                 <div class="filters__group">
@@ -56,9 +56,9 @@
             <div class="keuzehulp">
                 <h3 class="keuzehulp__title">Snel vinden wat bij u past</h3>
                 <div class="keuzehulp__options" id="keuzehulp">
-                    <button class="keuzehulp__btn" data-need="zekerheid">Zekerheid — geen verborgen kosten</button>
+                    <button class="keuzehulp__btn" data-need="zekerheid">Zekerheid  –  geen verborgen kosten</button>
                     <button class="keuzehulp__btn" data-need="budget">Laagste jaarlijkse kosten</button>
-                    <button class="keuzehulp__btn" data-need="wkkgz-only">Alleen Wkkgz — geen onnodige extra's</button>
+                    <button class="keuzehulp__btn" data-need="wkkgz-only">Alleen Wkkgz  –  geen onnodige extra's</button>
                 </div>
                 <div id="keuzehulpResult" class="keuzehulp__result" style="display:none"></div>
             </div>
@@ -85,7 +85,7 @@
 
     <footer class="footer">
         <div class="container footer__inner">
-            <div class="footer__col"><p><strong>WkkgzVergelijker</strong> — onafhankelijk. objectief. actueel.</p></div>
+            <div class="footer__col"><p><strong>WkkgzVergelijker</strong>  –  onafhankelijk. objectief. actueel.</p></div>
             <div class="footer__col">
                 <a href="/">Home</a> · <a href="/vergelijken.html">Vergelijken</a>
             </div>
@@ -120,7 +120,7 @@
         // Best budget without hidden risks
         const budgetSafe = safe[0];
         
-        // Best coverage (with Wkkgz only — safe + affordable)
+        // Best coverage (with Wkkgz only  –  safe + affordable)
         const broadest = providers.filter(p => 
             p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
         ).sort((a,b) => a.price_per_year - b.price_per_year)[0];
@@ -131,7 +131,7 @@
         const picks = [
             { label: 'Beste prijs-kwaliteit', p: budgetSafe, desc: 'Geen verborgen kosten, beste dekking voor uw geld' },
             { label: 'Beste dekking', p: broadest, desc: 'Alles gedekt, geen extra kosten bij geschil' },
-            { label: 'Laagste prijs', p: cheapest, desc: 'Minimale jaarlijkse kosten — let op voorwaarden' }
+            { label: 'Laagste prijs', p: cheapest, desc: 'Minimale jaarlijkse kosten  –  let op voorwaarden' }
         ];
 
         document.getElementById('topPicksGrid').innerHTML = picks.map(pick => {
@@ -140,7 +140,7 @@
                 (pick.p.kosten_per_zitting.includes('€2.500') || pick.p.kosten_per_zitting.includes('€1.815') || pick.p.kosten_per_zitting.includes('€1.500'));
             return `<div class="top-pick-card ${hasRisk ? 'top-pick-card--warning' : ''}">
                 <span class="top-pick-badge">${pick.label}</span>
-                <strong>${pick.p.name.split(' —')[0].split(' (')[0]}</strong>
+                <strong>${pick.p.name.split('  – ')[0].split(' (')[0]}</strong>
                 <span class="top-pick-price">€${pick.p.price_per_year.toFixed(2).replace('.',',')}/jr</span>
                 <span class="top-pick-desc">${pick.desc}</span>
                 ${hasRisk ? '<span class="top-pick-warning">Let op: hoge geschilkosten mogelijk</span>' : ''}
@@ -283,11 +283,11 @@
             const resultDiv = document.getElementById('keuzehulpResult');
             
             if (need === 'zekerheid') {
-                resultDiv.innerHTML = '<strong>Aanbevolen:</strong> SoloPartners SoloPlus (€90,75/jr) — alles gedekt, geen eigen risico. Enige aanbieder zonder verborgen kosten.';
+                resultDiv.innerHTML = '<strong>Aanbevolen:</strong> SoloPartners SoloPlus (€90,75/jr)  –  alles gedekt, geen eigen risico. Enige aanbieder zonder verborgen kosten.';
                 resultDiv.style.display = 'block';
                 applyFilter('no-deductible');
             } else if (need === 'wkkgz-only') {
-                resultDiv.innerHTML = '<strong>Aanbevolen:</strong> ZorgVoorZZP (€69,97/jr) — alleen Wkkgz, geen onnodige extra wetten. Voordelig en helder.';
+                resultDiv.innerHTML = '<strong>Aanbevolen:</strong> ZorgVoorZZP (€69,97/jr)  –  alleen Wkkgz, geen onnodige extra wetten. Voordelig en helder.';
                 resultDiv.style.display = 'block';
                 applyFilter('wkkgz-only');
             } else if (need === 'budget') {
