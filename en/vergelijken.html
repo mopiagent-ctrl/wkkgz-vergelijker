@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Wkkgz providers — Wkkgz Vergelijker</title>
+    <meta name="description" content="Independently compare all providers that help you comply with the Wkkgz. Filter by price, coverage, and hidden costs.">
+    <meta property="og:title" content="Compare Wkkgz providers — Wkkgz Vergelijker">
+    <meta property="og:description" content="Independently compare all providers that help you comply with the Wkkgz. Filter by price, coverage, and hidden costs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wkkgzvergelijker.nl/en/vergelijken.html">
+    <link rel="canonical" href="https://wkkgzvergelijker.nl/en/vergelijken.html">
+    <link rel="alternate" hreflang="nl" href="https://wkkgzvergelijker.nl/vergelijken.html">
+    <link rel="alternate" hreflang="en" href="https://wkkgzvergelijker.nl/en/vergelijken.html">
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="container nav__inner">
+            <a href="/en/" class="nav__logo">Wkkgz<span class="nav__logo-highlight">Vergelijker</span></a>
+            <div class="nav__links">
+                <a href="/en/" class="nav__link">Home</a>
+                <a href="/en/vergelijken.html" class="nav__link nav__link--active">Compare</a>
+                <a href="/en/blog.html" class="nav__link">Knowledge base</a>
+                <span class="nav__lang">
+                    <a href="/vergelijken.html" class="nav__lang-link">NL</a>
+                    <span class="nav__lang-sep">|</span>
+                    <a href="/en/vergelijken.html" class="nav__lang-link nav__lang-link--active">EN</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="comparison" style="padding-top:40px">
+        <div class="container">
+            <h2 class="section__title">Compare all Wkkgz providers</h2>
+            <p class="section__subtitle">Last verified: July 2026. All providers that help you comply with Wkkgz obligations — objectively compared on price, coverage, and conditions.</p>
+
+            <div class="filters">
+                <div class="filters__group">
+                    <label class="filters__label">Filter:</label>
+                    <div class="filters__buttons" id="filterButtons">
+                        <button class="filter-btn filter-btn--active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="budget">Budget (&lt; €60/yr)</button>
+                        <button class="filter-btn" data-filter="mid">Mid-range (€60-120)</button>
+                        <button class="filter-btn" data-filter="premium">Premium (&gt; €120)</button>
+                        <button class="filter-btn" data-filter="no-deductible">No hidden costs</button>
+                        <button class="filter-btn" data-filter="wkkgz-only">Wkkgz only</button>
+                    </div>
+                </div>
+                <div class="filters__sort">
+                    <label class="filters__label">Sort:</label>
+                    <select id="sortSelect" class="filters__select">
+                        <option value="price-asc">Price: low to high</option>
+                        <option value="price-desc">Price: high to low</option>
+                        <option value="rating">Best rating</option>
+                        <option value="name">Name (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="top-picks" id="topPicks">
+                <h3 class="top-picks__title">Our recommendations</h3>
+                <div class="top-picks__grid" id="topPicksGrid"><p>Loading...</p></div>
+            </div>
+
+            <div class="keuzehulp">
+                <h3 class="keuzehulp__title">Quickly find what suits you</h3>
+                <div class="keuzehulp__options" id="keuzehulp">
+                    <button class="keuzehulp__btn" data-need="zekerheid">Certainty — no hidden costs</button>
+                    <button class="keuzehulp__btn" data-need="budget">Lowest annual cost</button>
+                    <button class="keuzehulp__btn" data-need="wkkgz-only">Wkkgz only — no unnecessary extras</button>
+                </div>
+                <div id="keuzehulpResult" class="keuzehulp__result" style="display:none"></div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="comparison-table" id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Price per year</th>
+                            <th>Deductible</th>
+                            <th>Hearing costs</th>
+                            <th>Details</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"><tr><td colspan="6" style="text-align:center;padding:40px">Loading...</td></tr></tbody>
+                </table>
+            </div>
+
+            <p class="table__disclaimer">Prices exclude any deductibles. Last verified: July 2026. Check each provider's general terms and conditions.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <div class="footer__col"><p><strong>WkkgzVergelijker</strong> — independent. objective. current.</p></div>
+            <div class="footer__col">
+                <a href="/en/">Home</a> · <a href="/en/vergelijken.html">Compare</a>
+            </div>
+        </div>
+        <div class="footer__bottom"><div class="container"><p>&copy; 2026 WkkgzVergelijker</p></div></div>
+    </footer>
+
+    <a href="#" class="back-to-top">Top</a>
+
+    <script>
+    let providers = [];
+    let activeFilter = 'all';
+
+    async function loadProviders() {
+        try {
+            const res = await fetch('../data/providers.json');
+            providers = await res.json();
+            renderTopPicks();
+            sortAndRender('price-asc');
+        } catch(err) {
+            document.getElementById('tableBody').innerHTML =
+                '<tr><td colspan="6" style="text-align:center;padding:40px;color:#999">Data could not be loaded.</td></tr>';
+        }
+    }
+
+    function renderTopPicks() {
+        // Best all-round: no hidden costs, broad coverage, good rating
+        const safe = providers.filter(p =>
+            p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
+        ).sort((a,b) => a.price_per_year - b.price_per_year);
+
+        // Best budget without hidden risks
+        const budgetSafe = safe[0];
+
+        // Best coverage (Wkkgz only — safe + affordable)
+        const broadest = providers.filter(p =>
+            p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
+        ).sort((a,b) => a.price_per_year - b.price_per_year)[0];
+
+        // Cheapest overall (even if risky)
+        const cheapest = [...providers].sort((a,b) => a.price_per_year - b.price_per_year)[0];
+
+        const picks = [
+            { label: 'Best value', p: budgetSafe, desc: 'No hidden costs, best coverage for your money' },
+            { label: 'Best coverage', p: broadest, desc: 'Fully covered, no extra costs in a dispute' },
+            { label: 'Lowest price', p: cheapest, desc: 'Lowest annual cost — check the conditions' }
+        ];
+
+        document.getElementById('topPicksGrid').innerHTML = picks.map(pick => {
+            if (!pick.p) return '';
+            const hasRisk = pick.p.kosten_per_zitting &&
+                (pick.p.kosten_per_zitting.includes('€2.500') || pick.p.kosten_per_zitting.includes('€1.815') || pick.p.kosten_per_zitting.includes('€1.500'));
+            return `<div class="top-pick-card ${hasRisk ? 'top-pick-card--warning' : ''}">
+                <span class="top-pick-badge">${pick.label}</span>
+                <strong>${pick.p.name.split('  –  ')[0].split(' (')[0]}</strong>
+                <span class="top-pick-price">€${pick.p.price_per_year.toFixed(2).replace('.',',')}/yr</span>
+                <span class="top-pick-desc">${pick.desc}</span>
+                ${hasRisk ? '<span class="top-pick-warning">Warning: high dispute costs possible</span>' : ''}
+                <a href="${pick.p.url}" target="_blank" rel="noopener" class="top-pick-link">View provider</a>
+            </div>`;
+        }).join('');
+    }
+
+    function renderTable(data) {
+        const tbody = document.getElementById('tableBody');
+        if (!data.length) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px">No providers found for this selection.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = data.map(p => {
+            const ratingDots = Array.from({length:10}, (_,i) =>
+                `<span class="dot ${i < p.rating_value ? 'dot--filled' : ''}"></span>`).join('');
+
+            const tags = [];
+            if (p.price_per_year < 60) tags.push('<span class="provider-tag tag--budget">Budget</span>');
+            else if (p.price_per_year < 120) tags.push('<span class="provider-tag tag--mid">Mid-range</span>');
+            else tags.push('<span class="provider-tag tag--premium">Premium</span>');
+
+            // Check for hidden costs
+            const hasHidden = p.kosten_per_zitting &&
+                (p.kosten_per_zitting.includes('€2.500') ||
+                 p.kosten_per_zitting.includes('€295') ||
+                 p.kosten_per_zitting.includes('€4.000') ||
+                 p.depot_verplichting);
+            const allCovered = p.kosten_per_zitting &&
+                (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'));
+
+            if (hasHidden) tags.push('<span class="provider-tag tag--warning">Hidden costs</span>');
+            if (allCovered) tags.push('<span class="provider-tag tag--no-deductible">Fully covered</span>');
+            if (p.verplichte_bav) tags.push('<span class="provider-tag tag--warning">BAV required</span>');
+
+            const eigenRisicoClass = (p.eigen_risico_per_klacht || '').includes('€0') || (p.eigen_risico_per_klacht || '').includes('Geen') ? 'risk-green' : 'risk-red';
+            const zittingClass = allCovered ? 'risk-green' : (hasHidden ? 'risk-red' : 'risk-gray');
+            const dekking = [];
+            let dekkingHtml = '';
+            if (p.dekking_wzd || p.dekking_wmo || p.dekking_jeugdwet) {
+                const extra = [];
+                if (p.dekking_wzd) extra.push('Wzd');
+                if (p.dekking_wmo) extra.push('Wmo');
+                if (p.dekking_jeugdwet) extra.push('Jeugdwet');
+                dekkingHtml = `<span style="font-size:0.7rem;color:var(--gray-400);margin-top:2px">Also available: ${extra.join(', ')}</span>`;
+            }
+
+            // Competition badges
+            if (p.rating_value >= 9 && (p.kosten_per_zitting || '').includes('€0')) {
+                tags.push('<span class="provider-tag tag--best\\">Best choice</span>');
+            }
+            if (p.price_per_year <= 70 && (p.kosten_per_zitting || '').includes('€0')) {
+                tags.push('<span class="provider-tag tag--best-value\\">Best value</span>');
+            }
+            if (p.price_per_year === Math.min(...providers.filter(x => data.includes(x)).map(x => x.price_per_year))) {
+                tags.push('<span class="provider-tag tag--cheapest\\">Lowest price</span>');
+            }
+
+            return `<tr>
+                <td>
+                    <a href="${p.url}" target="_blank" rel="noopener" class="provider-name">${p.name}</a>
+                    <div class="provider-tags">${tags.join('')}</div>
+                </td>
+                <td>
+                    <span class="price-primary">€${p.price_per_year.toFixed(2).replace('.',',')}</span>
+                    <span class="price-note">incl. VAT</span>
+                    ${p.signup_fee > 0 ? `<span class="price-note">+ €${p.signup_fee.toFixed(2).replace('.',',')} registration fee</span>` : ''}
+                </td>
+                <td class="${eigenRisicoClass}">${p.eigen_risico_per_klacht || 'Unknown'}</td>
+                <td class="${zittingClass}">${p.kosten_per_zitting || 'Unknown'}</td>
+                <td>
+                    <div style="font-size:0.8rem;color:var(--gray-500)">${dekkingHtml}</div>
+                    ${p.geschilleninstantie ? `<div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px">${p.geschilleninstantie.substring(0,50)}</div>` : ''}
+                    ${p.best_for ? `<div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px;font-style:italic">${p.best_for.substring(0,80)}</div>` : ''}
+                </td>
+                <td>
+                    <div class="rating-dots">${ratingDots}</div>
+                    <a href="${p.url}" target="_blank" rel="noopener" class="price-cta">To site</a>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    function sortAndRender(sortBy) {
+        const sorted = [...providers];
+        switch(sortBy) {
+            case 'price-asc': sorted.sort((a,b) => a.price_per_year - b.price_per_year); break;
+            case 'price-desc': sorted.sort((a,b) => b.price_per_year - a.price_per_year); break;
+            case 'rating': sorted.sort((a,b) => b.rating_value - a.rating_value); break;
+            case 'name': sorted.sort((a,b) => a.name.localeCompare(b.name)); break;
+        }
+        renderTable(sorted);
+    }
+
+    function doSort() {
+        const sortBy = document.getElementById('sortSelect').value;
+        if (activeFilter === 'all') {
+            sortAndRender(sortBy);
+        } else {
+            applyFilter(activeFilter, sortBy);
+        }
+    }
+
+    function applyFilter(filter, sortBy) {
+        activeFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(b =>
+            b.classList.toggle('filter-btn--active', b.dataset.filter === filter));
+
+        let filtered = [...providers];
+        switch(filter) {
+            case 'budget': filtered = filtered.filter(p => p.price_per_year <= 60); break;
+            case 'mid': filtered = filtered.filter(p => p.price_per_year > 60 && p.price_per_year <= 120); break;
+            case 'premium': filtered = filtered.filter(p => p.price_per_year > 120); break;
+            case 'no-deductible': filtered = filtered.filter(p => p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))); break;
+            case 'wkkgz-only': filtered = filtered.filter(p => !p.dekking_wzd && !p.dekking_wmo && !p.dekking_jeugdwet && p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))); break;
+        }
+
+        sortBy = sortBy || document.getElementById('sortSelect').value;
+        switch(sortBy) {
+            case 'price-asc': filtered.sort((a,b) => a.price_per_year - b.price_per_year); break;
+            case 'price-desc': filtered.sort((a,b) => b.price_per_year - a.price_per_year); break;
+            case 'rating': filtered.sort((a,b) => b.rating_value - a.rating_value); break;
+            case 'name': filtered.sort((a,b) => a.name.localeCompare(b.name)); break;
+        }
+        renderTable(filtered);
+    }
+
+    document.getElementById('sortSelect').addEventListener('change', doSort);
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+    });
+
+    // Keuzehulp (decision aid)
+    document.querySelectorAll('.keuzehulp__btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.keuzehulp__btn').forEach(b => b.classList.remove('keuzehulp__btn--active'));
+            btn.classList.add('keuzehulp__btn--active');
+            const need = btn.dataset.need;
+            const resultDiv = document.getElementById('keuzehulpResult');
+
+            if (need === 'zekerheid') {
+                resultDiv.innerHTML = '<strong>Recommended:</strong> SoloPartners SoloPlus (€90.75/yr) — fully covered, no deductible. Only provider with no hidden costs.';
+                resultDiv.style.display = 'block';
+                applyFilter('no-deductible');
+            } else if (need === 'wkkgz-only') {
+                resultDiv.innerHTML = '<strong>Recommended:</strong> ZorgVoorZZP (€69.97/yr) — Wkkgz only, no unnecessary extra legislation. Affordable and transparent.';
+                resultDiv.style.display = 'block';
+                applyFilter('wkkgz-only');
+            } else if (need === 'budget') {
+                resultDiv.innerHTML = '<strong>Cheapest:</strong> ZorgDoenWijSamen (€48.40/yr). Note: in a dispute you pay €2,500 starting costs. Only choose this if you are fairly certain you won\'t receive complaints.';
+                resultDiv.style.display = 'block';
+                applyFilter('budget');
+            }
+        });
+    });
+
+    // Back to top
+    const btnTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => btnTop.classList.toggle('back-to-top--visible', window.scrollY > 400));
+    btnTop.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); });
+
+    loadProviders();
+    </script>
+</body>
+</html>
