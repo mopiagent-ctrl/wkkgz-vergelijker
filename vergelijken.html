@@ -34,7 +34,7 @@
                         <button class="filter-btn" data-filter="mid">Midden (€60-120)</button>
                         <button class="filter-btn" data-filter="premium">Premium (&gt; €120)</button>
                         <button class="filter-btn" data-filter="no-deductible">Geen verborgen kosten</button>
-                        <button class="filter-btn" data-filter="breedste-dekking">Incl. Wzd-dekking</button>
+                        <button class="filter-btn" data-filter="wkkgz-only">Alleen Wkkgz</button>
                     </div>
                 </div>
                 <div class="filters__sort">
@@ -56,9 +56,9 @@
             <div class="keuzehulp">
                 <h3 class="keuzehulp__title">Snel vinden wat bij u past</h3>
                 <div class="keuzehulp__options" id="keuzehulp">
-                    <button class="keuzehulp__btn" data-need="zekerheid">Geen verborgen kosten — zekerheid voorop</button>
-                    <button class="keuzehulp__btn" data-need="breedst">Breedste dekking, inclusief Wzd</button>
+                    <button class="keuzehulp__btn" data-need="zekerheid">Zekerheid — geen verborgen kosten</button>
                     <button class="keuzehulp__btn" data-need="budget">Laagste jaarlijkse kosten</button>
+                    <button class="keuzehulp__btn" data-need="wkkgz-only">Alleen Wkkgz — geen onnodige extra's</button>
                 </div>
                 <div id="keuzehulpResult" class="keuzehulp__result" style="display:none"></div>
             </div>
@@ -120,9 +120,9 @@
         // Best budget without hidden risks
         const budgetSafe = safe[0];
         
-        // Best coverage
+        // Best coverage (with Wkkgz only — safe + affordable)
         const broadest = providers.filter(p => 
-            p.dekking_wzd && p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
+            p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
         ).sort((a,b) => a.price_per_year - b.price_per_year)[0];
         
         // Cheapest overall (even if risky)
@@ -130,7 +130,7 @@
 
         const picks = [
             { label: 'Beste prijs-kwaliteit', p: budgetSafe, desc: 'Geen verborgen kosten, beste dekking voor uw geld' },
-            { label: 'Breedste dekking', p: broadest, desc: 'Wkkgz + Wzd + Wmo, zonder eigen risico' },
+            { label: 'Beste dekking', p: broadest, desc: 'Alles gedekt, geen extra kosten bij geschil' },
             { label: 'Laagste prijs', p: cheapest, desc: 'Minimale jaarlijkse kosten — let op voorwaarden' }
         ];
 
@@ -180,10 +180,14 @@
             const eigenRisicoClass = (p.eigen_risico_per_klacht || '').includes('€0') || (p.eigen_risico_per_klacht || '').includes('Geen') ? 'risk-green' : 'risk-red';
             const zittingClass = allCovered ? 'risk-green' : (hasHidden ? 'risk-red' : 'risk-gray');
             const dekking = [];
-            if (p.dekking_wzd) dekking.push('Wzd');
-            if (p.dekking_wmo) dekking.push('Wmo');
-            if (p.dekking_jeugdwet) dekking.push('Jeugdwet');
-            const dekkingStr = dekking.length ? dekking.join(' + ') : 'Alleen Wkkgz';
+            let dekkingHtml = '';
+            if (p.dekking_wzd || p.dekking_wmo || p.dekking_jeugdwet) {
+                const extra = [];
+                if (p.dekking_wzd) extra.push('Wzd');
+                if (p.dekking_wmo) extra.push('Wmo');
+                if (p.dekking_jeugdwet) extra.push('Jeugdwet');
+                dekkingHtml = `<span style="font-size:0.7rem;color:var(--gray-400);margin-top:2px">Ook beschikbaar: ${extra.join(', ')}</span>`;
+            }
 
             // Competition badges
             if (p.rating_value >= 9 && (p.kosten_per_zitting || '').includes('€0')) {
@@ -209,9 +213,9 @@
                 <td class="${eigenRisicoClass}">${p.eigen_risico_per_klacht || 'Onbekend'}</td>
                 <td class="${zittingClass}">${p.kosten_per_zitting || 'Onbekend'}</td>
                 <td>
-                    <div style="font-size:0.8rem;color:var(--gray-500)">Dekking: ${dekkingStr}</div>
+                    <div style="font-size:0.8rem;color:var(--gray-500)">${dekkingHtml}</div>
                     ${p.geschilleninstantie ? `<div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px">${p.geschilleninstantie.substring(0,50)}</div>` : ''}
-                    ${p.best_for ? `<div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px;font-style:italic">Beste voor: ${p.best_for.substring(0,80)}</div>` : ''}
+                    ${p.best_for ? `<div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px;font-style:italic">${p.best_for.substring(0,80)}</div>` : ''}
                 </td>
                 <td>
                     <div class="rating-dots">${ratingDots}</div>
@@ -252,7 +256,7 @@
             case 'mid': filtered = filtered.filter(p => p.price_per_year > 60 && p.price_per_year <= 120); break;
             case 'premium': filtered = filtered.filter(p => p.price_per_year > 120); break;
             case 'no-deductible': filtered = filtered.filter(p => p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))); break;
-            case 'breedste-dekking': filtered = filtered.filter(p => p.dekking_wzd === true && p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))); break;
+            case 'wkkgz-only': filtered = filtered.filter(p => !p.dekking_wzd && !p.dekking_wmo && !p.dekking_jeugdwet && p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))); break;
         }
         
         sortBy = sortBy || document.getElementById('sortSelect').value;
@@ -279,13 +283,13 @@
             const resultDiv = document.getElementById('keuzehulpResult');
             
             if (need === 'zekerheid') {
-                resultDiv.innerHTML = '<strong>Aanbevolen:</strong> SoloPartners SoloPlus (€90,75/jr) — alles gedekt, geen eigen risico, ook Wzd+Wmo. Enige aanbieder zonder verborgen kosten met brede dekking.';
+                resultDiv.innerHTML = '<strong>Aanbevolen:</strong> SoloPartners SoloPlus (€90,75/jr) — alles gedekt, geen eigen risico. Enige aanbieder zonder verborgen kosten.';
                 resultDiv.style.display = 'block';
                 applyFilter('no-deductible');
-            } else if (need === 'breedst') {
-                resultDiv.innerHTML = '<strong>Aanbevolen:</strong> SoloPartners SoloPlus en SoloCompleet bieden de breedste dekking (Wkkgz+Wzd+Wmo+Jeugdwet) zonder extra kosten per geschil.';
+            } else if (need === 'wkkgz-only') {
+                resultDiv.innerHTML = '<strong>Aanbevolen:</strong> ZorgVoorZZP (€69,97/jr) — alleen Wkkgz, geen onnodige extra wetten. Voordelig en helder.';
                 resultDiv.style.display = 'block';
-                applyFilter('breedste-dekking');
+                applyFilter('wkkgz-only');
             } else if (need === 'budget') {
                 resultDiv.innerHTML = '<strong>Goedkoopste:</strong> ZorgDoenWijSamen (€48,40/jr). Let op: bij een geschil betaalt u €2.500 startkosten. Kies alleen als u vrijwel zeker geen klachten verwacht.';
                 resultDiv.style.display = 'block';
