@@ -935,15 +935,33 @@ details summary:focus { outline: none; }
     .hero { padding: 50px 0 40px; }
     section { padding: 40px 0; }
     .section__title { font-size: 1.4rem; }
-    .nav__links { display: none; }
+    
+    /* Mobile nav: hamburger + essential links */
+    .nav__links { 
+        display: flex; 
+        gap: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .nav__link { font-size: 0.8rem; padding: 4px 8px; white-space: nowrap; }
+    .lang-switch { font-size: 0.8rem; padding: 4px 6px; }
+    
     .filters { flex-direction: column; }
     .filters__sort { min-width: 100%; }
     .filters__buttons { gap: 4px; }
     .filter-btn { font-size: 0.75rem; padding: 4px 10px; }
     .keuzehulp__options { grid-template-columns: repeat(2, 1fr); }
+    
+    /* Table: prevent header overlapping first row */
+    .table-wrapper { overflow-x: auto; }
     .comparison-table { font-size: 0.8rem; }
+    .comparison-table thead { position: sticky; top: 0; z-index: 10; }
+    .comparison-table thead th { background: #fff; }
     .comparison-table thead th,
-    .comparison-table tbody td { padding: 10px 6px; }
+    .comparison-table tbody td { padding: 8px 4px; }
+    
+    /* Cross-sell cards visible on mobile */
+    .cross-sell__grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
