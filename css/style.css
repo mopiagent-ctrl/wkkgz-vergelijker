@@ -489,18 +489,20 @@ section { padding: 60px 0; }
     min-width: 800px;
 }
 
-.comparison-table thead th {
+.comparison-table thead {
     position: sticky;
     top: 64px;
+    z-index: 10;
+}
+.comparison-table thead th {
     background: #fff;
     border-bottom: 2px solid var(--gray-300);
-    padding: 14px 10px;
+    padding: 10px 8px;
     text-align: left;
     font-weight: 600;
+    font-size: 0.8rem;
     color: var(--gray-700);
     white-space: nowrap;
-    z-index: 5;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
 .th-note {
