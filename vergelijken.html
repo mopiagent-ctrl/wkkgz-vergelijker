@@ -114,26 +114,25 @@
     }
 
     function renderTopPicks() {
-        // Best all-round: no hidden costs, broad coverage, good rating
+        // Best all-round: no hidden costs, good rating, exclude psychologist-only
         const safe = providers.filter(p => 
-            p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
-        ).sort((a,b) => a.price_per_year - b.price_per_year);
+            (p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt') || p.kosten_per_zitting.includes('gedekt'))) &&
+            !p.id.includes('nip')
+        );
         
-        // Best budget without hidden risks
-        const budgetSafe = safe[0];
+        // Best budget: cheapest without hidden risks
+        const budgetSafe = safe.sort((a,b) => a.price_per_year - b.price_per_year)[0];
         
-        // Best coverage (with Wkkgz only  –  safe + affordable)
-        const broadest = providers.filter(p => 
-            p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
-        ).sort((a,b) => a.price_per_year - b.price_per_year)[0];
+        // Best coverage: highest rated among safe picks
+        const broadest = [...safe].sort((a,b) => b.rating_value - a.rating_value)[0];
         
-        // Cheapest overall (even if risky)
-        const cheapest = [...providers].sort((a,b) => a.price_per_year - b.price_per_year)[0];
+        // Cheapest overall (even if risky, exclude psychologist-only)
+        const cheapest = providers.filter(p => !p.id.includes('nip')).sort((a,b) => a.price_per_year - b.price_per_year)[0];
 
         const picks = [
             { label: 'Beste prijs-kwaliteit', p: budgetSafe, desc: 'Geen eigen risico, beste dekking voor uw geld' },
-            { label: 'Beste dekking', p: broadest, desc: 'Alles gedekt, geen extra kosten bij geschil' },
-            { label: 'Laagste prijs', p: cheapest, desc: 'Minimale jaarlijkse kosten  –  let op voorwaarden' }
+            { label: 'Beste beoordeling', p: broadest, desc: 'Hoogst gewaardeerd door gebruikers — alles inbegrepen' },
+            { label: 'Laagste prijs', p: cheapest, desc: 'Minimale jaarlijkse kosten — let op voorwaarden' }
         ];
 
         document.getElementById('topPicksGrid').innerHTML = picks.map(pick => {
