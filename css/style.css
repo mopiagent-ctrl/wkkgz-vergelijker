@@ -598,9 +598,7 @@ section { padding: 60px 0; }
 .price-cta:hover { background: var(--primary-dark); }
 
 /* Deductible/Risks */
-.risk-green { color: var(--accent); font-weight: 600; }
-.risk-red { color: var(--danger); font-weight: 600; }
-.risk-gray { color: var(--gray-400); }
+.risk-neutral { color: var(--gray-700); }
 .risk-warning { color: var(--warning); font-weight: 600; }
 
 /* Rating dots */

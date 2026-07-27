@@ -165,21 +165,21 @@
             else if (p.price_per_year < 120) tags.push('<span class="provider-tag tag--mid">Midden</span>');
             else tags.push('<span class="provider-tag tag--premium">Premium</span>');
             
-            // Check voor bijkomende kosten
-            const hasHidden = p.kosten_per_zitting && 
-                (p.kosten_per_zitting.includes('€2.500') || 
-                 p.kosten_per_zitting.includes('€295') || 
-                 p.kosten_per_zitting.includes('€4.000') ||
-                 p.depot_verplichting);
+            // Neutral: no judgmental tags, just facts
+            const hasExtraCosts = p.kosten_per_zitting && !p.kosten_per_zitting.includes('€0') && !p.kosten_per_zitting.includes('gedekt') && !p.kosten_per_zitting.includes('Inbegrepen');
             const allCovered = p.kosten_per_zitting && 
-                (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'));
+                (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('gedekt') || p.kosten_per_zitting.includes('Inbegrepen'));
+            const hasDepot = p.depot_verplichting;
             
-            if (hasHidden) tags.push('<span class="provider-tag tag--warning">Bijkomende kosten</span>');
-            if (allCovered) tags.push('<span class="provider-tag tag--no-deductible">Alles gedekt</span>');
-            if (p.verplichte_bav) tags.push('<span class="provider-tag tag--warning">BAV verplicht</span>');
+            // Facts only: what's included, what's extra
+            if (allCovered) tags.push('<span class="provider-tag tag--no-deductible">Alles inbegrepen</span>');
+            if (hasDepot) tags.push('<span class="provider-tag tag--mid">Depotplicht</span>');
+            if (p.verplichte_bav) tags.push('<span class="provider-tag tag--mid">BAV vereist</span>');
+            if (p.dekking_wzd || p.dekking_wmo) tags.push('<span class="provider-tag tag--mid">Ook Wzd/Wmo</span>');
             
-            const eigenRisicoClass = (p.eigen_risico_per_klacht || '').includes('€0') || (p.eigen_risico_per_klacht || '').includes('Geen') ? 'risk-green' : 'risk-red';
-            const zittingClass = allCovered ? 'risk-green' : (hasHidden ? 'risk-red' : 'risk-gray');
+            // Neutral styling — no red/green judgment
+            const eigenRisicoClass = 'risk-neutral';
+            const zittingClass = 'risk-neutral';
             const dekking = [];
             let dekkingHtml = '';
             if (p.dekking_wzd || p.dekking_wmo || p.dekking_jeugdwet) {
