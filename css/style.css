@@ -952,10 +952,10 @@ details summary:focus { outline: none; }
     .filter-btn { font-size: 0.75rem; padding: 4px 10px; }
     .keuzehulp__options { grid-template-columns: repeat(2, 1fr); }
     
-    /* Table: prevent header overlapping first row */
+    /* Table: no sticky header on mobile — just normal scrollable table */
     .table-wrapper { overflow-x: auto; }
     .comparison-table { font-size: 0.8rem; }
-    .comparison-table thead { position: sticky; top: 0; z-index: 10; }
+    .comparison-table thead { position: static; }
     .comparison-table thead th { background: #fff; }
     .comparison-table thead th,
     .comparison-table tbody td { padding: 8px 4px; }
