@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compare Wkkgz providers — Wkkgz Vergelijker</title>
+    <title>Compare Wkkgz providers  –  Wkkgz Vergelijker</title>
     <meta name="description" content="Independently compare all providers that help you comply with the Wkkgz. Filter by price, coverage, and hidden costs.">
-    <meta property="og:title" content="Compare Wkkgz providers — Wkkgz Vergelijker">
+    <meta property="og:title" content="Compare Wkkgz providers  –  Wkkgz Vergelijker">
     <meta property="og:description" content="Independently compare all providers that help you comply with the Wkkgz. Filter by price, coverage, and hidden costs.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wkkgzvergelijker.nl/en/vergelijken.html">
@@ -14,8 +14,7 @@
     <link rel="alternate" hreflang="en" href="https://wkkgzvergelijker.nl/en/vergelijken.html">
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCSQ4RQTV9"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PCSQ4RQTV9');</script>
+
 </head>
 <body>
     <nav class="nav">
@@ -37,7 +36,7 @@
     <section class="comparison" style="padding-top:40px">
         <div class="container">
             <h2 class="section__title">Compare all Wkkgz providers</h2>
-            <p class="section__subtitle">Last verified: July 2026. All providers that help you comply with Wkkgz obligations — objectively compared on price, coverage, and conditions.</p>
+            <p class="section__subtitle">Last verified: July 2026. All providers that help you comply with Wkkgz obligations  –  objectively compared on price, coverage, and conditions.</p>
 
             <div class="filters">
                 <div class="filters__group">
@@ -70,9 +69,9 @@
             <div class="keuzehulp">
                 <h3 class="keuzehulp__title">Quickly find what suits you</h3>
                 <div class="keuzehulp__options" id="keuzehulp">
-                    <button class="keuzehulp__btn" data-need="zekerheid">Certainty — no hidden costs</button>
+                    <button class="keuzehulp__btn" data-need="zekerheid">Certainty  –  no hidden costs</button>
                     <button class="keuzehulp__btn" data-need="budget">Lowest annual cost</button>
-                    <button class="keuzehulp__btn" data-need="wkkgz-only">Wkkgz only — no unnecessary extras</button>
+                    <button class="keuzehulp__btn" data-need="wkkgz-only">Wkkgz only  –  no unnecessary extras</button>
                 </div>
                 <div id="keuzehulpResult" class="keuzehulp__result" style="display:none"></div>
             </div>
@@ -99,7 +98,7 @@
 
     <footer class="footer">
         <div class="container footer__inner">
-            <div class="footer__col"><p><strong>WkkgzVergelijker</strong> — independent. objective. current.</p></div>
+            <div class="footer__col"><p><strong>WkkgzVergelijker</strong>  –  independent. objective. current.</p></div>
             <div class="footer__col">
                 <a href="/en/">Home</a> · <a href="/en/vergelijken.html">Compare</a>
             </div>
@@ -134,7 +133,7 @@
         // Best budget without hidden risks
         const budgetSafe = safe[0];
 
-        // Best coverage (Wkkgz only — safe + affordable)
+        // Best coverage (Wkkgz only  –  safe + affordable)
         const broadest = providers.filter(p =>
             p.kosten_per_zitting && (p.kosten_per_zitting.includes('€0') || p.kosten_per_zitting.includes('Alles gedekt'))
         ).sort((a,b) => a.price_per_year - b.price_per_year)[0];
@@ -145,7 +144,7 @@
         const picks = [
             { label: 'Best value', p: budgetSafe, desc: 'No hidden costs, best coverage for your money' },
             { label: 'Best coverage', p: broadest, desc: 'Fully covered, no extra costs in a dispute' },
-            { label: 'Lowest price', p: cheapest, desc: 'Lowest annual cost — check the conditions' }
+            { label: 'Lowest price', p: cheapest, desc: 'Lowest annual cost  –  check the conditions' }
         ];
 
         document.getElementById('topPicksGrid').innerHTML = picks.map(pick => {
@@ -297,11 +296,11 @@
             const resultDiv = document.getElementById('keuzehulpResult');
 
             if (need === 'zekerheid') {
-                resultDiv.innerHTML = '<strong>Recommended:</strong> SoloPartners SoloPlus (€90.75/yr) — fully covered, no deductible. Only provider with no hidden costs.';
+                resultDiv.innerHTML = '<strong>Recommended:</strong> SoloPartners SoloPlus (€90.75/yr)  –  fully covered, no deductible. Only provider with no hidden costs.';
                 resultDiv.style.display = 'block';
                 applyFilter('no-deductible');
             } else if (need === 'wkkgz-only') {
-                resultDiv.innerHTML = '<strong>Recommended:</strong> ZorgVoorZZP (€69.97/yr) — Wkkgz only, no unnecessary extra legislation. Affordable and transparent.';
+                resultDiv.innerHTML = '<strong>Recommended:</strong> ZorgVoorZZP (€69.97/yr)  –  Wkkgz only, no unnecessary extra legislation. Affordable and transparent.';
                 resultDiv.style.display = 'block';
                 applyFilter('wkkgz-only');
             } else if (need === 'budget') {
@@ -319,5 +318,6 @@
 
     loadProviders();
     </script>
+<script src="js/cookie-consent.js"></script>
 </body>
 </html>

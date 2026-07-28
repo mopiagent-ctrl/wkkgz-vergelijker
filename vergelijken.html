@@ -6,9 +6,9 @@
     <title>Vergelijk Wkkgz-aanbieders  –  Wkkgz Vergelijker</title>
     <meta name="description" content="Vergelijk onafhankelijk alle aanbieders die u helpen aan de Wkkgz te voldoen. Filter op prijs, dekking en bijkomende kosten.">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cookie-banner.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PCSQ4RQTV9"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PCSQ4RQTV9');</script>
+
 </head>
 <body>
     <nav class="nav">
@@ -131,8 +131,8 @@
 
         const picks = [
             { label: 'Beste prijs-kwaliteit', p: budgetSafe, desc: 'Geen eigen risico, beste dekking voor uw geld' },
-            { label: 'Beste beoordeling', p: broadest, desc: 'Hoogst gewaardeerd door gebruikers — alles inbegrepen' },
-            { label: 'Laagste prijs', p: cheapest, desc: 'Minimale jaarlijkse kosten — let op voorwaarden' }
+            { label: 'Beste beoordeling', p: broadest, desc: 'Hoogst gewaardeerd door gebruikers  –  alles inbegrepen' },
+            { label: 'Laagste prijs', p: cheapest, desc: 'Minimale jaarlijkse kosten  –  let op voorwaarden' }
         ];
 
         document.getElementById('topPicksGrid').innerHTML = picks.map(pick => {
@@ -177,7 +177,7 @@
             if (p.verplichte_bav) tags.push('<span class="provider-tag tag--mid">BAV vereist</span>');
             if (p.dekking_wzd || p.dekking_wmo) tags.push('<span class="provider-tag tag--mid">Ook Wzd/Wmo</span>');
             
-            // Neutral styling — no red/green judgment
+            // Neutral styling  –  no red/green judgment
             const eigenRisicoClass = 'risk-neutral';
             const zittingClass = 'risk-neutral';
             const dekking = [];
@@ -305,5 +305,6 @@
 
     loadProviders();
     </script>
+<script src="js/cookie-consent.js"></script>
 </body>
 </html>
