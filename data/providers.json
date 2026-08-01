@@ -286,12 +286,12 @@
     "id": "zzp-nederland",
     "name": "ZZP Nederland (Klachtenregeling Zorg via Quasir/Zorggeschil)",
     "url": "https://www.zzp-nederland.nl",
-    "price_per_year": 79.95,
+    "price_per_year": 60.5,
     "signup_fee": 0,
-    "first_year_total": 79.95,
-    "renewal_total": 79.95,
+    "first_year_total": 60.5,
+    "renewal_total": 60.5,
     "inschrijfkosten": "Geen",
-    "price_note": "",
+    "price_note": "Prijs verlaagd van €79,95 naar €50 excl BTW (= €60,50 incl BTW) per jaar per officiële klachtenregeling-pagina (08-2026). Plus verplicht lidmaatschap ZZP Nederland €24,75/jaar extra.",
     "eigen_risico_per_klacht": "€0 — geen eigen risico of eigen bijdrage",
     "kosten_per_zitting": "€0 — geschillenbehandeling gedekt via abonnement bij Stichting Zorggeschil",
     "kosten_per_zitting_detail": "ZZP Nederland benadrukt nadrukkelijk: 'geen eigen bijdrage en geen eigen risico verschuldigd'. Klachtenfunctionaris (Quasir) en geschillencommissie (Stichting Zorggeschil) zijn inbegrepen. Let op: uitspraken van de geschilleninstantie die kosten met zich meebrengen (bijv. terugbetalen aan patiënt) zijn wél voor eigen rekening. Inlooprisico: klachten uit meer dan 1 jaar vóór start zijn voor eigen rekening.",
@@ -320,7 +320,7 @@
       "Lidmaatschap ZZP Nederland biedt extra voordelen"
     ],
     "cons": [
-      "Vereist lidmaatschap ZZP Nederland (€29,95/jaar extra)",
+      "Vereist lidmaatschap ZZP Nederland (€24,75/jaar extra)",
       "Inlooprisico-beperking: oudere klachten mogelijk niet gedekt",
       "Geen zelfstandig product — altijd in combinatie met ZZP Nederland",
       "Schadevergoeding uit geschillenuitspraak niet gedekt"
